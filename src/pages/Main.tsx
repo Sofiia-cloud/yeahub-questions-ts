@@ -12,7 +12,12 @@ function Main() {
 
   const questions = filterValues.questions;
   const pageNumber = filterValues.pageNumber;
-
+  if (loading) {
+    return <div>Загрузка вопросов...</div>;
+  }
+  if (!questions) {
+    return <div>Нет вопросов</div>;
+  }
   return (
     <>
       <Questions

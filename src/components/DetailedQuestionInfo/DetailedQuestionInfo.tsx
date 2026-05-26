@@ -1,5 +1,15 @@
 import LevelTag from "../LevelTag/LevelTag";
 import styles from "./DetailedQuestionInfo.module.css";
+interface Specialization {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  imageSrc: string;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: string | null;
+}
 interface Skill {
   id: number;
   title: string;
@@ -7,6 +17,7 @@ interface Skill {
   imageSrc: string;
   createdAt: string;
   updatedAt: string;
+  specializations: Array<Specialization>;
 }
 
 interface User {
@@ -22,8 +33,8 @@ interface Question {
   rate: number;
   complexity: number;
   questionSkills: Skill[];
-  keywords?: string[]; 
-  createdBy?: User | null; 
+  keywords?: string[];
+  createdBy?: User | null;
 }
 
 interface DetailedQuestionInfoProps {
