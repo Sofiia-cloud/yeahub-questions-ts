@@ -21,12 +21,19 @@ interface Skill {
   specializations: Array<Specialization>;
 }
 
+interface ApiResponse {
+  data: Skill[];
+  page: number;
+  limit: number;
+  total: number;
+}
+
 function useSkills(): Array<Skill> {
   const [skills, setSkills] = useState<Skill[]>([]);
   useEffect(() => {
     fetch("https://api.yeatwork.ru/skills")
       .then((response) => response.json())
-      .then((data) => setSkills(data?.data))
+      .then((data: ApiResponse) => setSkills(data?.data))
       .catch((error) => console.error("Error: ", error));
   }, []);
   return skills;
