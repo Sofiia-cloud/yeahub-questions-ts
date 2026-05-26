@@ -1,0 +1,46 @@
+.filterPanelContainter {
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  width: 360px;
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e9ecef;
+}
+
+.filterPanelContainter input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #1a1a2e;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.filterPanelContainter input:focus {
+  border-color: #5509cc;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.filterPanelContainter input::placeholder {
+  color: #adb5bd;
+}
+
+@media (max-width: 1200px) {
+  .filterPanelContainter {
+    width: 100%;
+    position: relative;
+    top: 0;
+    margin-bottom: 24px;
+  }
+}

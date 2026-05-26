@@ -1,0 +1,149 @@
+.infoContainer {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  width: 860px;
+  background-color: #ffffff;
+  gap: 24px;
+  border: none;
+  border-radius: 18px;
+  padding: 20px;
+  position: relative;
+}
+
+.infoCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+  padding: 20px 24px;
+}
+
+.infoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.infoRow:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.infoLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  min-width: 80px;
+}
+
+.levelRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 24px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.levelGroup {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.levelLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.author {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6a0bff;
+}
+
+.tagGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: #6a0bff;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: white;
+  font-weight: 600;
+}
+
+.skill {
+  border: 1px solid #6a0bff;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: black;
+  font-weight: 600;
+}
+
+.keyword {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #6a0bff;
+  font-weight: 600;
+}
+
+.expertCard {
+  border-radius: 12px;
+  border: 1px solid #6a0bff;
+  padding: 20px 24px;
+  color: rgb(6, 6, 6);
+}
+
+.expertCard h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.expertBadge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.expertCard p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1200px) {
+  .infoContainer {
+    width: 100%;
+  }
+}

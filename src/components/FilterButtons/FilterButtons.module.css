@@ -1,0 +1,75 @@
+.specializationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.specializationContainer__header {
+  font-size: 14px;
+  color: #1a1a2e;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.specializationContainer ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.specializationContainer li {
+  list-style: none;
+  width: auto;
+}
+
+.specializationContainer button {
+  width: auto;
+  padding: 8px 16px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.specializationContainer button:hover {
+  background-color: #e9ecef;
+  border-color: #5509cc;
+  color: #5509cc;
+}
+
+.specializationContainer button.btn_active {
+  background-color: #5509cc;
+  border-color: #5509cc;
+  color: #ffffff;
+}
+
+.specializationContainer button.btn_usual {
+  background-color: #f8f9fa;
+  border-color: #e9ecef;
+  color: #495057;
+}
+
+.specializationContainer > button:last-child {
+  margin-top: 4px;
+  text-align: center;
+  background: none;
+  border: none;
+  color: #5509cc;
+  text-decoration-style: solid;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px;
+  width: auto;
+}
