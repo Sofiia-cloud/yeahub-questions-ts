@@ -2,12 +2,28 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./DetailedQuestion.module.css";
 
-function DetailedQuestion({ question }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-  const { questionId } = useParams();
+interface Question {
+  id: number;
+  title: string;
+  description: string;
+  imageSrc: string | null;
+  shortAnswer: string;
+  longAnswer: string;
+  rate: number;
+  complexity: number;
+  keywords?: string[];
+}
 
-  const currentId = parseInt(questionId) || question.id;
+interface DetailedQuestionProps {
+  question: Question;
+}
+
+function DetailedQuestion({ question }: DetailedQuestionProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const { questionId } = useParams<{ questionId: string }>();
+
+  const currentId = parseInt(questionId || String(question.id), 10);
   const prevId = currentId - 1;
   const nextId = currentId + 1;
 

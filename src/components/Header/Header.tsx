@@ -5,7 +5,7 @@ function Header() {
       <div className={styles.headerContainer}>
         <div className={styles.headerContainer__logo}>
           <img src="src\images\logo.png" alt="Logo image" />
-          <img src="src\images\logo_Yeahub.png" alt="Yeahub logo"/>
+          <img src="src\images\logo_Yeahub.png" alt="Yeahub logo" />
         </div>
 
         <nav className={styles.headerContainer__links}>

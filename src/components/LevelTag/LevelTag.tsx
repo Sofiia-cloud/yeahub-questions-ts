@@ -1,5 +1,10 @@
 import styles from "./LevelTag.module.css";
-function LevelTag({ question }) {
+
+interface LevelTagProps {
+  question: { rate: number; complexity: number };
+}
+
+function LevelTag({ question }: LevelTagProps) {
   return (
     <div>
       <span className={styles.tag_name}>

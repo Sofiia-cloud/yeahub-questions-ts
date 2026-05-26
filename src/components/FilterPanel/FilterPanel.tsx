@@ -1,7 +1,64 @@
-import FilterButtons from "../filterButtons/FilterButtons";
+import FilterButtons from "../FilterButtons/FilterButtons";
 import styles from "./FilterPanel.module.css";
 
-function FilterPanel({ values, actions, data }) {
+interface Specialization {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  imageSrc: string | null;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: string | null;
+}
+
+interface Skill {
+  id: number;
+  title: string;
+  description: string;
+  imageSrc: string;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: null | string;
+  specializations: Specialization[];
+}
+
+interface FilterValues {
+  keywords: string;
+  selectedSpec: string;
+  selectedSkill: string;
+  selectedLevels: string;
+  selectedRating: string;
+  selectedStatus: string;
+  pageNumber?: number;
+}
+
+interface FilterActions {
+  setKeywords: (value: string) => void;
+  setSelectedSpec: (value: string) => void;
+  setSelectedSkill: (value: string) => void;
+  setSelectedLevels: (value: string) => void;
+  setSelectedRating: (value: string) => void;
+  setSelectedStatus: (value: string) => void;
+}
+
+interface FilterData {
+  specializations: Specialization[];
+  skills: Skill[];
+}
+
+interface FilterPanelProps {
+  values: FilterValues;
+  actions: FilterActions;
+  data: FilterData;
+}
+
+interface ConfigItem {
+  id: number;
+  title: string | number;
+}
+
+function FilterPanel({ values, actions, data }: FilterPanelProps) {
   const {
     keywords,
     selectedSpec,
@@ -20,14 +77,14 @@ function FilterPanel({ values, actions, data }) {
   } = actions;
   const { specializations, skills } = data;
 
-  const levelsConfig = [
+  const levelsConfig: ConfigItem[] = [
     { id: 1, title: "1-3" },
     { id: 4, title: "4-6" },
     { id: 7, title: "7-8" },
     { id: 9, title: "9-10" },
   ];
 
-  const ratingConfig = [
+  const ratingConfig: ConfigItem[] = [
     { id: 1, title: 1 },
     { id: 2, title: 2 },
     { id: 3, title: 3 },
@@ -35,7 +92,7 @@ function FilterPanel({ values, actions, data }) {
     { id: 5, title: 5 },
   ];
 
-  const statusConfig = [
+  const statusConfig: ConfigItem[] = [
     { id: 1, title: "Изученные" },
     { id: 2, title: "Не изученные" },
     { id: 3, title: "Все" },

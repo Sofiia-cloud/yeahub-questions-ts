@@ -1,7 +1,36 @@
 import LevelTag from "../LevelTag/LevelTag";
 import styles from "./DetailedQuestionInfo.module.css";
+interface Skill {
+  id: number;
+  title: string;
+  description: string;
+  imageSrc: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-function DetailedQuestionInfo({ question }) {
+interface User {
+  id: string;
+  username: string;
+}
+
+interface Question {
+  id: number;
+  title: string;
+  imageSrc: string | null;
+  shortAnswer: string;
+  rate: number;
+  complexity: number;
+  questionSkills: Skill[];
+  keywords?: string[]; 
+  createdBy?: User | null; 
+}
+
+interface DetailedQuestionInfoProps {
+  question: Question;
+}
+
+function DetailedQuestionInfo({ question }: DetailedQuestionInfoProps) {
   return (
     <div className={styles.infoContainer}>
       <div className={styles.infoCard}>

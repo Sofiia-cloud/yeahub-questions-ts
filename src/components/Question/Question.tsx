@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom";
 import styles from "./Question.module.css";
 import LevelTag from "../LevelTag/LevelTag";
-function Question({ question, isOpen, toggleQuestion }) {
+
+interface QuestionProps {
+  question: {
+    id: number;
+    title: string;
+    imageSrc: string | null;
+    shortAnswer: string;
+    rate: number;
+    complexity: number;
+  };
+  isOpen: boolean;
+  toggleQuestion: (id: number) => void;
+}
+function Question({ question, isOpen, toggleQuestion }: QuestionProps) {
   return (
     <li key={question.id}>
       <h3>{question.title}</h3>

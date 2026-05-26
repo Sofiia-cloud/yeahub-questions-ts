@@ -1,7 +1,13 @@
 import styles from "./Pagination.module.css";
-export function Pagination({ page, total, onChange }) {
-  const getPagination = (total) => {
-    const pages = [];
+
+interface PaginationProps {
+  page: number;
+  total: number;
+  onChange: (page: number) => void;
+}
+export function Pagination({ page, total, onChange }: PaginationProps) {
+  const getPagination = (total: number): (number | string)[] => {
+    const pages: (number | string)[] = [];
 
     if (total <= 7) {
       for (let i = 1; i <= total; i++) pages.push(i);
@@ -19,8 +25,8 @@ export function Pagination({ page, total, onChange }) {
     return pages;
   };
 
-  const paginationItems = getPagination(total);
-  const last = paginationItems[paginationItems.length - 1];
+  const paginationItems: (number | string)[] = getPagination(total);
+  const last: number | string = paginationItems[paginationItems.length - 1];
 
   return (
     <div className={styles.pagination}>
@@ -39,7 +45,7 @@ export function Pagination({ page, total, onChange }) {
               className={item === page ? styles.active : ""}
               onClick={() => {
                 if (item !== "...") {
-                  onChange(item);
+                  onChange(item as number);
                 }
               }}
             >

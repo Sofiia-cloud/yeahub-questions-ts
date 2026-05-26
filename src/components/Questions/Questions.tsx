@@ -1,13 +1,31 @@
 import { Pagination } from "../Pagination/Pagination";
-import ReactMarkdown from "react-markdown";
 
 import styles from "./Questions.module.css";
 import { useState } from "react";
 import Question from "../Question/Question";
-function Questions({ questions, pageNumber, setPageNumber }) {
+
+interface Question {
+  id: number;
+  title: string;
+  imageSrc: string | null;
+  shortAnswer: string;
+  rate: number;
+  complexity: number;
+}
+
+interface QuestionsProps {
+  questions: {
+    total: number;
+    limit: number;
+    data: Question[];
+  };
+  pageNumber: number;
+  setPageNumber: (page: number) => void;
+}
+function Questions({ questions, pageNumber, setPageNumber }: QuestionsProps) {
   const totalPages = Math.ceil(questions?.total / questions?.limit);
-  const [openQuestionId, setOpenQuestionId] = useState(null);
-  const toggleQuestion = (id) => {
+  const [openQuestionId, setOpenQuestionId] = useState<number | null>(null);
+  const toggleQuestion = (id: number) => {
     setOpenQuestionId(openQuestionId === id ? null : id);
   };
   return (
