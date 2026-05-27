@@ -10,7 +10,9 @@ interface FilterButtonsProps<T> {
   setSelected: (value: string) => void;
 }
 
-function FilterButtons<T extends { id: number | string; [key: string]: any }>({
+function FilterButtons<
+  T extends { id: number | string; [key: string]: unknown },
+>({
   name,
   title,
   valueKey = title,

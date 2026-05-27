@@ -1,16 +1,12 @@
 import { Link } from "react-router-dom";
 import styles from "./Question.module.css";
 import LevelTag from "../LevelTag/LevelTag";
-
+import type { Question as QuestionType } from "../../types";
 interface QuestionProps {
-  question: {
-    id: number;
-    title: string;
-    imageSrc: string | null;
-    shortAnswer: string;
-    rate: number;
-    complexity: number;
-  };
+  question: Pick<
+    QuestionType,
+    "id" | "title" | "imageSrc" | "shortAnswer" | "rate" | "complexity"
+  >;
   isOpen: boolean;
   toggleQuestion: (id: number) => void;
 }

@@ -1,14 +1,5 @@
 import { useEffect, useState } from "react";
-interface Specialization {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  imageSrc: string | null;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: string | null;
-}
+import type { Specialization } from "../types";
 
 interface ApiResponse {
   data: Specialization[];

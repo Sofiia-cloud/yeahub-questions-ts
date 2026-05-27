@@ -22,7 +22,6 @@ function Main() {
     <>
       <Questions
         questions={questions}
-        loading={loading}
         pageNumber={pageNumber}
         setPageNumber={filterActions.setPageNumber}
       />

@@ -1,7 +1,7 @@
 import styles from "./LevelTag.module.css";
-
+import type { Question } from "../../types";
 interface LevelTagProps {
-  question: { rate: number; complexity: number };
+  question: Pick<Question, "rate" | "complexity">;
 }
 
 function LevelTag({ question }: LevelTagProps) {

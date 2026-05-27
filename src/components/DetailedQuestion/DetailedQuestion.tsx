@@ -1,18 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./DetailedQuestion.module.css";
-
-interface Question {
-  id: number;
-  title: string;
-  description: string;
-  imageSrc: string | null;
-  shortAnswer: string;
-  longAnswer: string;
-  rate: number;
-  complexity: number;
-  keywords?: string[];
-}
+import type { Question } from "../../types";
 
 interface DetailedQuestionProps {
   question: Question;

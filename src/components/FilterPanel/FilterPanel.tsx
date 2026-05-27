@@ -1,47 +1,11 @@
 import FilterButtons from "../FilterButtons/FilterButtons";
 import styles from "./FilterPanel.module.css";
-
-interface Specialization {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  imageSrc: string | null;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: string | null;
-}
-
-interface Skill {
-  id: number;
-  title: string;
-  description: string;
-  imageSrc: string | null;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: null | string;
-  specializations: Specialization[];
-}
-
-interface FilterValues {
-  keywords: string;
-  selectedSpec: string;
-  selectedSkill: string;
-  selectedLevels: string;
-  selectedRating: string;
-  selectedStatus: string;
-  pageNumber?: number;
-}
-
-interface FilterActions {
-  setKeywords: (value: string) => void;
-  setSelectedSpec: (value: string) => void;
-  setSelectedSkill: (value: string) => void;
-  setSelectedLevels: (value: string) => void;
-  setSelectedRating: (value: string) => void;
-  setSelectedStatus: (value: string) => void;
-}
-
+import type {
+  Specialization,
+  Skill,
+  FilterValues,
+  FilterActions,
+} from "../../types";
 interface FilterData {
   specializations: Specialization[];
   skills: Skill[];

@@ -1,42 +1,6 @@
 import LevelTag from "../LevelTag/LevelTag";
 import styles from "./DetailedQuestionInfo.module.css";
-interface Specialization {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  imageSrc: string;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: string | null;
-}
-interface Skill {
-  id: number;
-  title: string;
-  description: string;
-  imageSrc: string;
-  createdAt: string;
-  updatedAt: string;
-  specializations: Array<Specialization>;
-}
-
-interface User {
-  id: string;
-  username: string;
-}
-
-interface Question {
-  id: number;
-  title: string;
-  imageSrc: string | null;
-  shortAnswer: string;
-  rate: number;
-  complexity: number;
-  questionSkills: Skill[];
-  keywords?: string[];
-  createdBy?: User | null;
-}
-
+import type { Question } from "../../types";
 interface DetailedQuestionInfoProps {
   question: Question;
 }
