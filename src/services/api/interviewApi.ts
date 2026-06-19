@@ -18,5 +18,5 @@ const interviewApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetInterviewQuery } = interviewApi;
+export const { useGetInterviewQuery, useLazyGetInterviewQuery } = interviewApi;
 export default interviewApi;
