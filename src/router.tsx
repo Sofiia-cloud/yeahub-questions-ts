@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Main from "./pages/Main";
 import Question from "./pages/Question/Question";
-import QuizSetup from "./components/QuizSetup/QuizSetup";
+import Quiz from "./pages/Quiz/Quiz";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/quiz",
-        element: <QuizSetup />,
+        element: <Quiz />,
       },
     ],
   },

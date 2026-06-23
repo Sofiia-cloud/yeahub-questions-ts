@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 function Header() {
   return (
@@ -9,8 +10,8 @@ function Header() {
         </div>
 
         <nav className={styles.headerContainer__links}>
-          <a href="#">База вопросов</a>
-          <a href="#">Тренажер</a>
+          <Link to="/">База вопросов</Link>
+          <Link to="/quiz">Тренажер</Link>
           <a href="#">Материалы</a>
         </nav>
         <div className={styles.headerContainer__buttons}>

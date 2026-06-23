@@ -19,7 +19,7 @@ interface QuizSetupForm {
 export default function QuizSetup() {
   const dispatch = useAppDispatch();
   const complexityLevels = ["1-3", "4-6", "7-8", "9-10"];
-  
+
   const { register, handleSubmit, watch, setValue } = useForm<QuizSetupForm>({
     defaultValues: {
       specializationSlug: "",
@@ -33,7 +33,7 @@ export default function QuizSetup() {
   const { data: specializations, isLoading: specsLoading } =
     useGetSpecializationsQuery();
   const { data: skills, isLoading: skillsLoading } = useGetSkillsQuery();
-  
+
   // ✅ Исправлено: isLoading: error → isLoading, error
   const [getInterview, { isLoading, error }] = useLazyGetInterviewQuery();
 
@@ -44,7 +44,7 @@ export default function QuizSetup() {
         skills: data.skills.length > 0 ? data.skills.join(",") : undefined,
         questionCount: data.questionCount,
       }).unwrap();
-      
+
       if (result) {
         dispatch(
           startQuiz({
@@ -114,11 +114,7 @@ export default function QuizSetup() {
           <div className={styles.optionsGroup}>
             {complexityLevels.map((level) => (
               <label key={level} className={styles.option}>
-                <input
-                  type="radio"
-                  value={level}
-                  {...register("complexity")}
-                />
+                <input type="radio" value={level} {...register("complexity")} />
                 <span>{level}</span>
               </label>
             ))}
@@ -155,7 +151,7 @@ export default function QuizSetup() {
                 onClick={() => {
                   const current = watch("questionCount");
                   if (current > 5) {
-                    setValue("questionCount", current - 5);
+                    setValue("questionCount", current - 1);
                   }
                 }}
               >
@@ -175,7 +171,7 @@ export default function QuizSetup() {
                 onClick={() => {
                   const current = watch("questionCount");
                   if (current < 35) {
-                    setValue("questionCount", current + 5);
+                    setValue("questionCount", current + 1);
                   }
                 }}
               >
@@ -185,8 +181,8 @@ export default function QuizSetup() {
           </div>
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className={styles.startButton}
           disabled={isLoading}
         >
@@ -199,8 +195,6 @@ export default function QuizSetup() {
           </div>
         )}
       </form>
-
-      
     </div>
   );
 }

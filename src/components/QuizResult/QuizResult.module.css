@@ -1,0 +1,229 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #1a1a2e;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2d2d44;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 30px;
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
+}
+
+.progressCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  background: white;
+  border-radius: 50%;
+}
+
+.circle > * {
+  position: relative;
+  z-index: 1;
+}
+
+.progressPercent {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.progressLabel {
+  font-size: 14px;
+  color: #888;
+  font-weight: 500;
+}
+
+.statsCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.statCard {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.statValue {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.skillsSection {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
+}
+
+.skillsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skillRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.skillName {
+  min-width: 120px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.skillProgress {
+  flex: 1;
+  height: 8px;
+  background: #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skillProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.skillCount {
+  min-width: 60px;
+  text-align: right;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.questionsSection {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
+}
+
+.questionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.questionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.questionItem:last-child {
+  border-bottom: none;
+}
+
+.questionText {
+  font-size: 15px;
+  color: #333;
+}
+
+.known {
+  color: #00b894;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.unknown {
+  color: #e17055;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.resetButton {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 40px;
+  padding: 16px;
+  background: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.resetButton:hover {
+  background: #5a4bd1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+}
+
+.footer {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  padding-top: 20px;
+  border-top: 2px solid #e8e8e8;
+}
+
+.footer p {
+  margin-bottom: 6px;
+}

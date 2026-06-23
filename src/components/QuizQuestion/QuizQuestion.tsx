@@ -61,10 +61,6 @@ export default function QuizQuestion() {
         </button>
         <div className={styles.questionCard}>
           <h2 className={styles.questionTitle}>{question.title}</h2>
-          <div
-            className={styles.questionDescription}
-            dangerouslySetInnerHTML={{ __html: question.description }}
-          />
 
           <button className={styles.showAnswerButton}>Посмотреть ответ</button>
         </div>
