@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   finishQuiz,
@@ -10,6 +11,7 @@ import styles from "./QuizQuestion.module.css";
 
 export default function QuizQuestion() {
   const dispatch = useAppDispatch();
+  const [isAnswer, setIsAnswer] = useState(false);
   const { questions, currentQuestionIndex, isFinished, answers } =
     useAppSelector((state) => state.quiz);
 
@@ -26,6 +28,10 @@ export default function QuizQuestion() {
 
   const handleAnswer = (status: "KNOWN" | "UNKNOWN") => {
     dispatch(setAnswer({ questionId: question.id, status }));
+  };
+
+  const showAnswer = () => {
+    return setIsAnswer(!isAnswer);
   };
 
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -61,8 +67,15 @@ export default function QuizQuestion() {
         </button>
         <div className={styles.questionCard}>
           <h2 className={styles.questionTitle}>{question.title}</h2>
-
-          <button className={styles.showAnswerButton}>Посмотреть ответ</button>
+          {isAnswer && (
+            <div
+              className={styles.answer}
+              dangerouslySetInnerHTML={{ __html: question.shortAnswer }}
+            />
+          )}
+          <button className={styles.showAnswerButton} onClick={showAnswer}>
+            {isAnswer ? "Скрыть ответ" : "Посмотреть ответ"}
+          </button>
         </div>
         <button
           className={`${styles.answerButton} ${styles.unknownButton} ${currentAnswer === "UNKNOWN" ? styles.active : ""}`}

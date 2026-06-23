@@ -10,7 +10,7 @@ interface InterviewParams {
 const interviewApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getInterview: builder.query<Interview, InterviewParams>({
-      query: ({ specializationSlug, skills, questionCount = 10 }) => ({
+      query: ({ specializationSlug, skills, questionCount }) => ({
         url: "/interview-preparation/quizzes/mock/new",
         params: { specializationSlug, skills, questionCount },
       }),

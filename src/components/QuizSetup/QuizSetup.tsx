@@ -6,7 +6,7 @@ import {
 } from "../../services/api/filtersApi";
 import { useLazyGetInterviewQuery } from "../../services/api/interviewApi";
 import { startQuiz } from "../../store/slices/quizSlice";
-import styles from "./QuizSetups.module.css"; // ✅ исправлено название файла
+import styles from "./QuizSetups.module.css"; 
 
 interface QuizSetupForm {
   specializationSlug: string;
