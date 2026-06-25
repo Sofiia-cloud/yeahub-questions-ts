@@ -2,18 +2,31 @@ import { api } from "./index";
 import type { Interview } from "../types";
 
 interface InterviewParams {
-  specializationSlug?: string;
+  specialization?: number;
   skills?: string;
-  questionCount?: number;
+  complexity?: string;
+  limit?: number;
 }
 
 const interviewApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getInterview: builder.query<Interview, InterviewParams>({
-      query: ({ specializationSlug, skills, questionCount }) => ({
-        url: "/interview-preparation/quizzes/mock/new",
-        params: { specializationSlug, skills, questionCount },
-      }),
+      query: ({ specialization, skills, complexity, limit = 10 }) => {
+        const params: Record<string, string | number | undefined> = {
+          specialization,
+          skills,
+          limit,
+        };
+
+        if (complexity) {
+          params.complexity = complexity;
+        }
+
+        return {
+          url: "/interview-preparation/quizzes/mock/new",
+          params,
+        };
+      },
     }),
   }),
 });

@@ -44,8 +44,10 @@ function QuizResult() {
 
       {/* Статистика */}
       <div className={styles.statsSection}>
-        <h3 className={styles.sectionTitle}>Статистика пройденных вопросов</h3>
         <div className={styles.statsGrid}>
+          <h3 className={styles.sectionTitle}>
+            Статистика пройденных вопросов
+          </h3>
           <div className={styles.progressCircle}>
             <div className={styles.circle}>
               <span className={styles.progressPercent}>{progress}%</span>
@@ -74,33 +76,36 @@ function QuizResult() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Прогресс по навыкам */}
-      {skillStats.length > 0 && (
-        <div className={styles.skillsSection}>
-          <h3 className={styles.sectionTitle}>Прогресс обучения по навыкам</h3>
-          <div className={styles.skillsList}>
-            {skillStats.map((skill) => {
-              const percentage = Math.round((skill.known / skill.total) * 100);
-              return (
-                <div key={skill.id} className={styles.skillRow}>
-                  <span className={styles.skillName}>{skill.title}</span>
-                  <div className={styles.skillProgress}>
-                    <div
-                      className={styles.skillProgressFill}
-                      style={{ width: `${percentage}%` }}
-                    />
+        {/* Прогресс по навыкам */}
+        {skillStats.length > 0 && (
+          <div className={styles.skillsSection}>
+            <h3 className={styles.sectionTitle}>
+              Прогресс обучения по навыкам
+            </h3>
+            <div className={styles.skillsList}>
+              {skillStats.map((skill) => {
+                const percentage = Math.round(
+                  (skill.known / skill.total) * 100,
+                );
+                return (
+                  <div key={skill.id} className={styles.skillRow}>
+                    <span className={styles.skillName}>{skill.title}</span>
+                    <div className={styles.skillProgress}>
+                      <div
+                        className={styles.skillProgressFill}
+                        style={{ width: `${percentage}%` }}
+                      />
+                    </div>
+                    <span className={styles.skillCount}>
+                      {skill.known}/{skill.total}
+                    </span>
                   </div>
-                  <span className={styles.skillCount}>
-                    {skill.known}/{skill.total}
-                  </span>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Список вопросов */}
       <div className={styles.questionsSection}>

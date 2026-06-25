@@ -6,7 +6,6 @@ import {
   previousQuestion,
   setAnswer,
 } from "../../store/slices/quizSlice";
-
 import styles from "./QuizQuestion.module.css";
 
 export default function QuizQuestion() {
@@ -19,7 +18,7 @@ export default function QuizQuestion() {
     return null;
   }
   if (!questions.length) {
-    return <p>Нет вопросов</p>;
+    return <p className={styles.empty}>Нет вопросов</p>;
   }
 
   const question = questions[currentQuestionIndex];
@@ -30,16 +29,18 @@ export default function QuizQuestion() {
     dispatch(setAnswer({ questionId: question.id, status }));
   };
 
-  const showAnswer = () => {
-    return setIsAnswer(!isAnswer);
+  const toggleAnswer = () => {
+    setIsAnswer(!isAnswer);
   };
 
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
+  const isFirstQuestion = currentQuestionIndex === 0;
 
   return (
-    <div>
-      <div>
-        <h1>Вопросы собеседования</h1>
+    <div className={styles.container}>
+      {/* Карточка с прогрессом */}
+      <div className={styles.questionCard}>
+        <h1 className={styles.header}>Вопросы собеседования</h1>
         <div className={styles.progressContainer}>
           <div className={styles.progressBar}>
             <div
@@ -52,45 +53,73 @@ export default function QuizQuestion() {
           </span>
         </div>
       </div>
-      <div>
-        <button
-          onClick={() => dispatch(previousQuestion())}
-          disabled={currentQuestionIndex === 0}
-        >
-          ← Назад
-        </button>
-        <button
-          onClick={() => dispatch(nextQuestion())}
-          disabled={isLastQuestion}
-        >
-          Далее →
-        </button>
-        <div className={styles.questionCard}>
-          <h2 className={styles.questionTitle}>{question.title}</h2>
-          {isAnswer && (
-            <div
-              className={styles.answer}
-              dangerouslySetInnerHTML={{ __html: question.shortAnswer }}
-            />
-          )}
-          <button className={styles.showAnswerButton} onClick={showAnswer}>
-            {isAnswer ? "Скрыть ответ" : "Посмотреть ответ"}
+
+      {/* Карточка с вопросом */}
+      <div className={styles.questionCard}>
+        {/* Навигация (стрелки) */}
+        <div className={styles.topNavigation}>
+          <button
+            className={styles.arrowButton}
+            onClick={() => dispatch(previousQuestion())}
+            disabled={isFirstQuestion}
+          >
+            ←
+          </button>
+          <button
+            className={styles.arrowButton}
+            onClick={() => dispatch(nextQuestion())}
+            disabled={isLastQuestion}
+          >
+            →
           </button>
         </div>
-        <button
-          className={`${styles.answerButton} ${styles.unknownButton} ${currentAnswer === "UNKNOWN" ? styles.active : ""}`}
-          onClick={() => handleAnswer("UNKNOWN")}
-        >
-          Не знаю
+
+        <h2 className={styles.questionTitle}>{question.title}</h2>
+
+        {/* Кнопка показа ответа */}
+        <button className={styles.showAnswerButton} onClick={toggleAnswer}>
+          {isAnswer ? "Скрыть ответ" : "Посмотреть ответ"}
         </button>
-        <button
-          className={`${styles.answerButton} ${styles.knownButton} ${currentAnswer === "KNOWN" ? styles.active : ""}`}
-          onClick={() => handleAnswer("KNOWN")}
-        >
-          Знаю
-        </button>
+
+        {/* Блок ответа */}
+        {isAnswer && (
+          <div
+            className={styles.answer}
+            dangerouslySetInnerHTML={{ __html: question.shortAnswer }}
+          />
+        )}
+
+        {/* Кнопки "Знаю / Не знаю" */}
+        <div className={styles.answerSection}>
+          <button
+            className={`${styles.answerButton} ${
+              currentAnswer === "UNKNOWN" ? styles.active : ""
+            }`}
+            onClick={() => handleAnswer("UNKNOWN")}
+          >
+            Не знаю
+          </button>
+          <button
+            className={`${styles.answerButton} ${
+              currentAnswer === "KNOWN" ? styles.active : ""
+            }`}
+            onClick={() => handleAnswer("KNOWN")}
+          >
+            Знаю
+          </button>
+        </div>
+
         <hr />
-        <button onClick={() => dispatch(finishQuiz())}>Завершить</button>
+
+        {/* Нижняя навигация */}
+        <div className={styles.bottomNavigation}>
+          <button
+            className={styles.finishButton}
+            onClick={() => dispatch(finishQuiz())}
+          >
+            Завершить
+          </button>
+        </div>
       </div>
     </div>
   );

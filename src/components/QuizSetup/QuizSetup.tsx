@@ -6,10 +6,10 @@ import {
 } from "../../services/api/filtersApi";
 import { useLazyGetInterviewQuery } from "../../services/api/interviewApi";
 import { startQuiz } from "../../store/slices/quizSlice";
-import styles from "./QuizSetups.module.css"; 
+import styles from "./QuizSetups.module.css";
 
 interface QuizSetupForm {
-  specializationSlug: string;
+  specialization: number;
   skills: string[];
   complexity: string;
   mode: "repeat" | "new" | "random";
@@ -18,13 +18,18 @@ interface QuizSetupForm {
 
 export default function QuizSetup() {
   const dispatch = useAppDispatch();
-  const complexityLevels = ["1-3", "4-6", "7-8", "9-10"];
+  const complexityLevels = [
+    { label: "1-3", value: "1,2,3" },
+    { label: "4-6", value: "4,5,6" },
+    { label: "7-8", value: "7,8" },
+    { label: "9-10", value: "9,10" },
+  ];
 
   const { register, handleSubmit, watch, setValue } = useForm<QuizSetupForm>({
     defaultValues: {
-      specializationSlug: "",
+      specialization: 0,
       skills: [],
-      complexity: "1-3",
+      complexity: "1,2,3",
       mode: "random",
       questionCount: 10,
     },
@@ -34,15 +39,15 @@ export default function QuizSetup() {
     useGetSpecializationsQuery();
   const { data: skills, isLoading: skillsLoading } = useGetSkillsQuery();
 
-  // ✅ Исправлено: isLoading: error → isLoading, error
   const [getInterview, { isLoading, error }] = useLazyGetInterviewQuery();
 
   const onSubmit = async (data: QuizSetupForm) => {
     try {
       const result = await getInterview({
-        specializationSlug: data.specializationSlug || undefined,
+        specialization: data.specialization,
         skills: data.skills.length > 0 ? data.skills.join(",") : undefined,
-        questionCount: data.questionCount,
+        complexity: data.complexity,
+        limit: data.questionCount,
       }).unwrap();
 
       if (result) {
@@ -72,18 +77,17 @@ export default function QuizSetup() {
     <div className={styles.container}>
       <h1 className={styles.title}>Собеседование</h1>
 
-      {/* ✅ Форма теперь содержит все элементы */}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         {/* Выбор специализации */}
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Выбор специализации</p>
           <div className={styles.specializationGrid}>
             {specializations?.map((spec) => (
-              <label key={spec.id} className={styles.option}>
+              <label key={spec.id} className={styles.specializationOption}>
                 <input
                   type="radio"
-                  value={spec.slug}
-                  {...register("specializationSlug")}
+                  value={spec.id}
+                  {...register("specialization", { valueAsNumber: true })}
                 />
                 <span>{spec.title}</span>
               </label>
@@ -96,7 +100,7 @@ export default function QuizSetup() {
           <p className={styles.sectionTitle}>Категории вопросов</p>
           <div className={styles.skillsGrid}>
             {skills?.map((skill) => (
-              <label key={skill.id} className={styles.option}>
+              <label key={skill.id} className={styles.skillOption}>
                 <input
                   type="checkbox"
                   value={skill.id.toString()}
@@ -111,11 +115,15 @@ export default function QuizSetup() {
         {/* Уровень сложности */}
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Уровень сложности</p>
-          <div className={styles.optionsGroup}>
+          <div className={styles.complexityGroup}>
             {complexityLevels.map((level) => (
-              <label key={level} className={styles.option}>
-                <input type="radio" value={level} {...register("complexity")} />
-                <span>{level}</span>
+              <label key={level.value} className={styles.complexityOption}>
+                <input
+                  type="radio"
+                  value={level.value}
+                  {...register("complexity")}
+                />
+                <span>{level.label}</span>
               </label>
             ))}
           </div>
@@ -124,16 +132,16 @@ export default function QuizSetup() {
         {/* Выбор режима */}
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Выберите режим</h3>
-          <div className={styles.optionsGroup}>
-            <label className={styles.option}>
+          <div className={styles.modeGroup}>
+            <label className={styles.modeOption}>
               <input type="radio" value="repeat" {...register("mode")} />
               <span>Повторение</span>
             </label>
-            <label className={styles.option}>
+            <label className={styles.modeOption}>
               <input type="radio" value="new" {...register("mode")} />
               <span>Только новые</span>
             </label>
-            <label className={styles.option}>
+            <label className={styles.modeOption}>
               <input type="radio" value="random" {...register("mode")} />
               <span>Случайные</span>
             </label>
@@ -143,7 +151,6 @@ export default function QuizSetup() {
         {/* Количество вопросов */}
         <div className={styles.section}>
           <div className={styles.countControl}>
-            <label htmlFor="questionCount">Количество вопросов</label>
             <div className={styles.countInput}>
               <button
                 type="button"
@@ -186,7 +193,7 @@ export default function QuizSetup() {
           className={styles.startButton}
           disabled={isLoading}
         >
-          {isLoading ? "Загрузка..." : "Начать собеседование"}
+          {isLoading ? "Загрузка..." : "Начать ->"}
         </button>
 
         {error && (

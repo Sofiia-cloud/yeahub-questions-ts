@@ -2,6 +2,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  background-color: white;
+  border-radius: 15px;
 }
 
 .loading {
@@ -13,7 +15,7 @@
 
 .title {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 30px;
   color: #1a1a2e;
 }
@@ -24,27 +26,37 @@
 
 .sectionTitle {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 15px;
-  color: #2d2d44;
+  color: #444445;
 }
 
-.specializationGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+/* ===== ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ КНОПОК-ФИЛЬТРОВ ===== */
+.specializationGrid,
+.skillsGrid,
+.complexityGroup,
+.modeGroup {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
+/* ===== КНОПКИ СПЕЦИАЛИЗАЦИИ ===== */
 .specializationOption {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  justify-content: center;
+  padding: 10px 20px;
+  background: white;
   border: 2px solid #e8e8e8;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 14px;
+  font-weight: 500;
+  color: #444445;
+  user-select: none;
+  min-width: 120px;
 }
 
 .specializationOption:hover {
@@ -52,28 +64,31 @@
   border-color: #6c5ce7;
 }
 
-.specializationOption input[type="radio"] {
-  accent-color: #6c5ce7;
-  width: 18px;
-  height: 18px;
+.specializationOption input {
+  display: none; /* ✅ скрываем радио-кнопку */
 }
 
-.skillsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
+.specializationOption:has(input:checked) {
+  background: #6c5ce7;
+  border-color: #6c5ce7;
+  color: white;
 }
 
+/* ===== КНОПКИ НАВЫКОВ ===== */
 .skillOption {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
+  justify-content: center;
+  padding: 8px 16px;
+  background: white;
   border: 2px solid #e8e8e8;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 14px;
+  font-weight: 500;
+  color: #444445;
+  user-select: none;
 }
 
 .skillOption:hover {
@@ -81,28 +96,31 @@
   border-color: #6c5ce7;
 }
 
-.skillOption input[type="checkbox"] {
-  accent-color: #6c5ce7;
-  width: 16px;
-  height: 16px;
+.skillOption input {
+  display: none; /* ✅ скрываем чекбокс */
 }
 
-.complexityGroup {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.skillOption:has(input:checked) {
+  background: #6c5ce7;
+  border-color: #6c5ce7;
+  color: white;
 }
 
+/* ===== КНОПКИ СЛОЖНОСТИ ===== */
 .complexityOption {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+  justify-content: center;
+  padding: 10px 24px;
+  background: white;
   border: 2px solid #e8e8e8;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 14px;
   font-weight: 500;
+  color: #444445;
+  user-select: none;
 }
 
 .complexityOption:hover {
@@ -110,27 +128,31 @@
   border-color: #6c5ce7;
 }
 
-.complexityOption input[type="radio"] {
-  accent-color: #6c5ce7;
-  width: 16px;
-  height: 16px;
+.complexityOption input {
+  display: none; /* ✅ скрываем радио-кнопку */
 }
 
-.modeGroup {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+.complexityOption:has(input:checked) {
+  background: #6c5ce7;
+  border-color: #6c5ce7;
+  color: white;
 }
 
+/* ===== КНОПКИ РЕЖИМА ===== */
 .modeOption {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+  justify-content: center;
+  padding: 10px 24px;
+  background: white;
   border: 2px solid #e8e8e8;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444445;
+  user-select: none;
 }
 
 .modeOption:hover {
@@ -138,12 +160,17 @@
   border-color: #6c5ce7;
 }
 
-.modeOption input[type="radio"] {
-  accent-color: #6c5ce7;
-  width: 16px;
-  height: 16px;
+.modeOption input {
+  display: none; /* ✅ скрываем радио-кнопку */
 }
 
+.modeOption:has(input:checked) {
+  background: #6c5ce7;
+  border-color: #6c5ce7;
+  color: white;
+}
+
+/* ===== КОЛИЧЕСТВО ВОПРОСОВ ===== */
 .countControl {
   display: flex;
   align-items: center;
@@ -181,7 +208,7 @@
   border-color: #6c5ce7;
 }
 
-.countInput input {
+.countInputField {
   width: 70px;
   height: 40px;
   text-align: center;
@@ -191,9 +218,12 @@
   font-weight: 500;
 }
 
+/* ===== КНОПКА СТАРТ ===== */
 .startButton {
-  width: 100%;
+  width: 20%;
   padding: 16px;
+  margin-left: auto;
+  margin-right: 0;
   background: #6c5ce7;
   color: white;
   border: none;
@@ -203,6 +233,7 @@
   cursor: pointer;
   transition: all 0.2s;
   margin-top: 10px;
+  display: block;
 }
 
 .startButton:hover:not(:disabled) {
@@ -217,6 +248,7 @@
   transform: none;
 }
 
+/* ===== ОШИБКА ===== */
 .error {
   margin-top: 15px;
   padding: 14px;
@@ -226,6 +258,7 @@
   border-left: 4px solid #c0392b;
 }
 
+/* ===== ФУТЕР ===== */
 .footer {
   margin-top: 60px;
   padding-top: 30px;
