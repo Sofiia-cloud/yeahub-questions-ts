@@ -6,5 +6,5 @@ export interface Specialization {
   imageSrc: string | null;
   createdAt: string;
   updatedAt: string;
-  createdBy: string | null;
+  createdBy?: string | null;
 }

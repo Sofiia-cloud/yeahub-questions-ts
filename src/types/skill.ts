@@ -7,6 +7,6 @@ export interface Skill {
   imageSrc: string | null;
   createdAt: string;
   updatedAt: string;
-  createdBy: null | string;
+  createdBy?: null | string;
   specializations: Specialization[];
 }
