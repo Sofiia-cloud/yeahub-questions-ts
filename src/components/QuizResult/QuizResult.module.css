@@ -12,15 +12,16 @@
 }
 
 .sectionTitle {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 20px;
   color: #2d2d44;
 }
 
+/* ===== ОСНОВНОЙ БЛОК СТАТИСТИКИ ===== */
 .statsGrid {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
   background: white;
   border-radius: 16px;
@@ -29,42 +30,54 @@
   margin-bottom: 30px;
 }
 
-.progressCircle {
+/* ===== ЛЕВАЯ КОЛОНКА ===== */
+.statsLeft {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.circle {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+/* ===== ПРАВАЯ КОЛОНКА ===== */
+.statsRight {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-left: 1px solid #e8e8e8;
+  padding-left: 30px;
+}
 
+/* ===== КРУГОВАЯ ДИАГРАММА ===== */
+.progressCircle {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
+  gap: 8px;
 }
 
-.circle::before {
-  content: "";
-  position: absolute;
-  width: 110px;
-  height: 110px;
-  background: white;
-  border-radius: 50%;
+.circleSvg {
+  width: 140px;
+  height: 140px;
 }
 
-.circle > * {
-  position: relative;
-  z-index: 1;
+.circleBg {
+  fill: none;
+  stroke: #e8e8e8;
+  stroke-width: 10;
 }
 
-.progressPercent {
-  font-size: 32px;
+.circleProgress {
+  fill: none;
+  stroke: #6c5ce7;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.circleText {
+  font-size: 24px;
   font-weight: 700;
-  color: #1a1a2e;
+  fill: #1a1a2e;
 }
 
 .progressLabel {
@@ -73,54 +86,60 @@
   font-weight: 500;
 }
 
+/* ===== КАРТОЧКИ СТАТИСТИКИ ===== */
 .statsCards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  gap: 10px;
 }
 
 .statCard {
   text-align: center;
-  padding: 20px;
+  padding: 16px 12px;
   background: #f8f9fa;
   border-radius: 12px;
 }
 
 .statValue {
   display: block;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #1a1a2e;
 }
 
 .statLabel {
-  font-size: 14px;
+  font-size: 13px;
   color: #888;
   margin-top: 4px;
 }
 
-.skillsSection {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  margin-bottom: 30px;
-}
-
+/* ===== ПРОГРЕСС ПО НАВЫКАМ ===== */
 .skillsList {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.skillsList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.skillsList::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 4px;
 }
 
 .skillRow {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .skillName {
-  min-width: 120px;
+  min-width: 80px;
   font-weight: 500;
   font-size: 14px;
   color: #333;
@@ -128,7 +147,7 @@
 
 .skillProgress {
   flex: 1;
-  height: 8px;
+  height: 6px;
   background: #e8e8e8;
   border-radius: 4px;
   overflow: hidden;
@@ -142,13 +161,21 @@
 }
 
 .skillCount {
-  min-width: 60px;
+  min-width: 50px;
   text-align: right;
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
   font-weight: 500;
 }
 
+.noSkills {
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* ===== СПИСОК ВОПРОСОВ - КАРТОЧКИ ===== */
 .questionsSection {
   background: white;
   border-radius: 16px;
@@ -157,73 +184,126 @@
   margin-bottom: 30px;
 }
 
-.questionsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 400px;
+/* ===== СЕТКА КАРТОЧЕК ===== */
+.questionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  max-height: 500px;
   overflow-y: auto;
+  padding-right: 4px;
 }
 
-.questionItem {
+.questionsGrid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.questionsGrid::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 4px;
+}
+
+/* ===== КАРТОЧКА ВОПРОСА ===== */
+.questionCard {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 18px;
+
+  border-radius: 12px;
+  border: 2px solid #e8e8e8;
+  transition: all 0.2s;
+  min-height: 80px;
+  gap: 10px;
 }
 
-.questionItem:last-child {
-  border-bottom: none;
+.questionCard:hover {
+  border-color: #6c5ce7;
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.1);
 }
 
 .questionText {
-  font-size: 15px;
-  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a2e;
+  line-height: 1.4;
+}
+
+/* ===== БЕЙДЖ СТАТУСА ===== */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
+  align-self: flex-end;
 }
 
 .known {
-  color: #00b894;
-  font-weight: 600;
-  font-size: 14px;
+  background: #e1e0e0;
+  color: #6c5ce7;
 }
 
 .unknown {
-  color: #e17055;
-  font-weight: 600;
-  font-size: 14px;
+  background: #e1e0e0;
+  color: black;
 }
 
-.resetButton {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto 40px;
-  padding: 16px;
-  background: #6c5ce7;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
+.skipped {
+  background: #e1e0e0;
+  color: #000;
 }
 
-.resetButton:hover {
-  background: #5a4bd1;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
-}
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 16px;
+  }
 
-.footer {
-  text-align: center;
-  color: #888;
-  font-size: 14px;
-  padding-top: 20px;
-  border-top: 2px solid #e8e8e8;
-}
+  .statsGrid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
 
-.footer p {
-  margin-bottom: 6px;
+  .statsRight {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid #e8e8e8;
+    padding-top: 20px;
+  }
+
+  .statsCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skillRow {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skillName {
+    min-width: 60px;
+    font-size: 13px;
+  }
+
+  .questionsSection {
+    padding: 20px;
+  }
+
+  .questionsGrid {
+    grid-template-columns: 1fr;
+    max-height: 400px;
+  }
+
+  .questionCard {
+    min-height: 60px;
+  }
+
+  .circleSvg {
+    width: 120px;
+    height: 120px;
+  }
 }

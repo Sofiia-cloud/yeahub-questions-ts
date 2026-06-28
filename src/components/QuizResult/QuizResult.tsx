@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../store/hooks";
-
 import styles from "./QuizResult.module.css";
 
 function QuizResult() {
@@ -7,10 +6,11 @@ function QuizResult() {
 
   // Подсчет статистики
   const totalQuestions = questions.length;
-  // const answeredCount = Object.keys(answers).length;
   const knownCount = Object.values(answers).filter((a) => a === "KNOWN").length;
-  const unknownCount = totalQuestions - knownCount;
-  // const skippedCount = totalQuestions - answeredCount;
+  const unknownCount = Object.values(answers).filter(
+    (a) => a === "UNKNOWN",
+  ).length;
+
   const progress =
     totalQuestions > 0 ? Math.round((knownCount / totalQuestions) * 100) : 0;
 
@@ -38,21 +38,54 @@ function QuizResult() {
     [] as Array<{ id: number; title: string; total: number; known: number }>,
   );
 
+  // Вычисляем угол для круговой диаграммы
+  const circleCircumference = 2 * Math.PI * 45;
+  const strokeDasharray = circleCircumference;
+  const strokeDashoffset =
+    circleCircumference - (progress / 100) * circleCircumference;
+
+  const getStatusLabel = (status: string | undefined) => {
+    if (status === "KNOWN") return { text: "Знаю", className: styles.known };
+    if (status === "UNKNOWN")
+      return { text: "Не знаю", className: styles.unknown };
+    return { text: "Пропущено", className: styles.skipped };
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Умный режим изучения вопросов</h1>
 
-      {/* Статистика */}
-      <div className={styles.statsSection}>
-        <div className={styles.statsGrid}>
+      {/* Статистика + Прогресс по навыкам в одном блоке */}
+      <div className={styles.statsGrid}>
+        {/* Левая колонка - Статистика */}
+        <div className={styles.statsLeft}>
           <h3 className={styles.sectionTitle}>
             Статистика пройденных вопросов
           </h3>
+
           <div className={styles.progressCircle}>
-            <div className={styles.circle}>
-              <span className={styles.progressPercent}>{progress}%</span>
-              <span className={styles.progressLabel}>Изученно</span>
-            </div>
+            <svg className={styles.circleSvg} viewBox="0 0 120 120">
+              <circle className={styles.circleBg} cx="60" cy="60" r="45" />
+              <circle
+                className={styles.circleProgress}
+                cx="60"
+                cy="60"
+                r="45"
+                strokeDasharray={strokeDasharray}
+                strokeDashoffset={strokeDashoffset}
+                transform="rotate(-90 60 60)"
+              />
+              <text
+                className={styles.circleText}
+                x="60"
+                y="60"
+                textAnchor="middle"
+                dominantBaseline="central"
+              >
+                {progress}%
+              </text>
+            </svg>
+            <span className={styles.progressLabel}>Изученно</span>
           </div>
 
           <div className={styles.statsCards}>
@@ -76,14 +109,13 @@ function QuizResult() {
             </div>
           </div>
         </div>
-        {/* Прогресс по навыкам */}
-        {skillStats.length > 0 && (
-          <div className={styles.skillsSection}>
-            <h3 className={styles.sectionTitle}>
-              Прогресс обучения по навыкам
-            </h3>
-            <div className={styles.skillsList}>
-              {skillStats.map((skill) => {
+
+        {/* Правая колонка - Прогресс по навыкам */}
+        <div className={styles.statsRight}>
+          <h3 className={styles.sectionTitle}>Прогресс обучения по навыкам</h3>
+          <div className={styles.skillsList}>
+            {skillStats.length > 0 ? (
+              skillStats.map((skill) => {
                 const percentage = Math.round(
                   (skill.known / skill.total) * 100,
                 );
@@ -101,36 +133,35 @@ function QuizResult() {
                     </span>
                   </div>
                 );
-              })}
-            </div>
+              })
+            ) : (
+              <p className={styles.noSkills}>Нет данных по навыкам</p>
+            )}
           </div>
-        )}
+        </div>
       </div>
 
-      {/* Список вопросов */}
+      {/* Список вопросов - КАРТОЧКИ */}
       <div className={styles.questionsSection}>
         <h3 className={styles.sectionTitle}>
           Список пройденных вопросов собеседования
         </h3>
-        <ul className={styles.questionsList}>
+        <div className={styles.questionsGrid}>
           {questions.map((q) => {
             const status = answers[q.id];
+            const statusInfo = getStatusLabel(status);
             return (
-              <li key={q.id} className={styles.questionItem}>
+              <div key={q.id} className={styles.questionCard}>
                 <span className={styles.questionText}>{q.title}</span>
                 <span
-                  className={status === "KNOWN" ? styles.known : styles.unknown}
+                  className={`${styles.statusBadge} ${statusInfo.className}`}
                 >
-                  {status === "KNOWN"
-                    ? "Знаю"
-                    : status === "UNKNOWN"
-                      ? "Не знаю"
-                      : "Пропущено"}
+                  {statusInfo.text}
                 </span>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </div>
     </div>
   );
