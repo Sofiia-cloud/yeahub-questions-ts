@@ -1,8 +1,8 @@
-/* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+
 .container {
-  width: 1200px; /* ✅ как в фильтрах */
+  width: 1200px; 
   margin: 0 auto;
-  padding: 40px 20px; /* ✅ как в фильтрах */
+  padding: 40px 20px;
 }
 
 .empty {

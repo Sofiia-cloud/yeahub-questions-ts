@@ -38,7 +38,7 @@ export default function QuizQuestion() {
 
   return (
     <div className={styles.container}>
-      {/* Карточка с прогрессом */}
+     
       <div className={styles.questionCard}>
         <h1 className={styles.header}>Вопросы собеседования</h1>
         <div className={styles.progressContainer}>
@@ -54,9 +54,9 @@ export default function QuizQuestion() {
         </div>
       </div>
 
-      {/* Карточка с вопросом */}
+     
       <div className={styles.questionCard}>
-        {/* Навигация (стрелки) */}
+       
         <div className={styles.topNavigation}>
           <button
             className={styles.arrowButton}
@@ -76,12 +76,12 @@ export default function QuizQuestion() {
 
         <h2 className={styles.questionTitle}>{question.title}</h2>
 
-        {/* Кнопка показа ответа */}
+     
         <button className={styles.showAnswerButton} onClick={toggleAnswer}>
           {isAnswer ? "Скрыть ответ" : "Посмотреть ответ"}
         </button>
 
-        {/* Блок ответа */}
+      
         {isAnswer && (
           <div
             className={styles.answer}
@@ -89,7 +89,7 @@ export default function QuizQuestion() {
           />
         )}
 
-        {/* Кнопки "Знаю / Не знаю" */}
+    
         <div className={styles.answerSection}>
           <button
             className={`${styles.answerButton} ${
@@ -111,7 +111,7 @@ export default function QuizQuestion() {
 
         <hr />
 
-        {/* Нижняя навигация */}
+       
         <div className={styles.bottomNavigation}>
           <button
             className={styles.finishButton}

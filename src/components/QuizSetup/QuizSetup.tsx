@@ -78,7 +78,7 @@ export default function QuizSetup() {
       <h1 className={styles.title}>Собеседование</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        {/* Выбор специализации */}
+       
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Выбор специализации</p>
           <div className={styles.specializationGrid}>
@@ -95,7 +95,7 @@ export default function QuizSetup() {
           </div>
         </div>
 
-        {/* Категории вопросов (навыки) */}
+       
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Категории вопросов</p>
           <div className={styles.skillsGrid}>
@@ -112,7 +112,7 @@ export default function QuizSetup() {
           </div>
         </div>
 
-        {/* Уровень сложности */}
+       
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Уровень сложности</p>
           <div className={styles.complexityGroup}>
@@ -129,7 +129,7 @@ export default function QuizSetup() {
           </div>
         </div>
 
-        {/* Выбор режима */}
+       
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Выберите режим</h3>
           <div className={styles.modeGroup}>
@@ -148,7 +148,7 @@ export default function QuizSetup() {
           </div>
         </div>
 
-        {/* Количество вопросов */}
+       
         <div className={styles.section}>
           <div className={styles.countControl}>
             <div className={styles.countInput}>
