@@ -1,29 +1,66 @@
-import { Link, useParams } from "react-router-dom";
-import useQuestionDetails from "../../hooks/useQuestionDetails";
+import {  useNavigate, useParams } from "react-router-dom";
 import styles from "./Question.module.css";
 import DetailedQuestion from "../../components/DetailedQuestion/DetailedQuestion";
 import DetailedQuestionInfo from "../../components/DetailedQuestionInfo/DetailedQuestionInfo";
+import { useGetQuestionByIdQuery } from "../../services/api/questionsApi";
 
 function Question() {
   const { questionId } = useParams<{ questionId: string }>();
-  const id = questionId ? parseInt(questionId, 10) : undefined;
-  const question = useQuestionDetails(id!);
+  const navigate = useNavigate();
 
-  if (!question) {
+  if (!questionId) {
     return (
       <>
-        <Link to={"/"} className={styles.link}>
+        <button onClick={() => navigate(-1)} className={styles.link}>
           ← Назад
-        </Link>
-        <div className={styles.error}>{"Вопрос не найден"}</div>
+        </button>
+        <div className={styles.error}>ID вопроса не указан</div>
       </>
     );
   }
+
+  const id = parseInt(questionId, 10);
+
+  if (isNaN(id)) {
+    return (
+      <>
+        <button onClick={() => navigate(-1)} className={styles.link}>
+          ← Назад
+        </button>
+        <div className={styles.error}>Неверный ID вопроса</div>
+      </>
+    );
+  }
+
+  const { data: question, isLoading, error } = useGetQuestionByIdQuery(id);
+
+  if (isLoading) {
+    return (
+      <>
+        <button onClick={() => navigate(-1)} className={styles.link}>
+          ← Назад
+        </button>
+        <div className={styles.loading}>Загрузка вопроса...</div>
+      </>
+    );
+  }
+
+  if (error || !question) {
+    return (
+      <>
+        <button onClick={() => navigate(-1)} className={styles.link}>
+          ← Назад
+        </button>
+        <div className={styles.error}>Вопрос не найден</div>
+      </>
+    );
+  }
+
   return (
     <>
-      <Link to={"/"} className={styles.link}>
+      <button onClick={() => navigate(-1)} className={styles.link}>
         ← Назад
-      </Link>
+      </button>
 
       <DetailedQuestion question={question} />
       <DetailedQuestionInfo question={question} />

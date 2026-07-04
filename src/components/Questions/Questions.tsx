@@ -3,13 +3,9 @@ import { Pagination } from "../Pagination/Pagination";
 import styles from "./Questions.module.css";
 import { useState } from "react";
 import Question from "../Question/Question";
-import type { Question as QuestionType } from "../../types";
+import type { QuestionsResponse } from "../../types";
 interface QuestionsProps {
-  questions: {
-    total: number;
-    limit: number;
-    data: QuestionType[];
-  };
+  questions: QuestionsResponse;
   pageNumber: number;
   setPageNumber: (page: number) => void;
 }

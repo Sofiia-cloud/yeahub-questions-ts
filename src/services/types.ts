@@ -32,13 +32,22 @@ export interface SkillsResponse {
   currentPage?: number;
 }
 
+export interface QuestionTopic {
+  id: number;
+  title: string;
+  description: string;
+  imageSrc: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Question {
   id: number;
   title: string;
   slug: string;
   description: string;
   code: string | null;
-  imageSrc: string | undefined;
+  imageSrc: string | null;
   keywords: string[];
   longAnswer: string;
   shortAnswer: string;
@@ -49,12 +58,11 @@ export interface Question {
   updatedAt: string;
   createdById: string;
   updatedById: string;
-
   createdBy: User;
   updatedBy: User;
-
-  questionSpecializations: [];
+  questionSpecializations: Specializations[];
   questionSkills: Skills[];
+  questionTopics: QuestionTopic[];
 }
 
 export interface QuestionsResponse {
@@ -63,12 +71,11 @@ export interface QuestionsResponse {
   limit: number;
   page: number;
 }
-
 export interface PublicQueryParams {
   page: number;
   limit: number;
   titleOrDescription?: string;
-  specializationId?: number;
+  specializationSlug?: string;
   skills?: string;
   complexity?: string;
   rate?: string;
@@ -118,3 +125,25 @@ export interface Interview {
 }
 
 export type AnswerStatus = "KNOWN" | "UNKNOWN";
+
+export interface FilterValues {
+  keywords: string;
+  pageNumber: number;
+  selectedSpec: string;
+  selectedSkill: string;
+  selectedLevels: string;
+  selectedRating: string;
+  selectedStatus: string;
+  questions?: QuestionsResponse | null;
+}
+
+export interface FilterActions {
+  setKeywords: (value: string) => void;
+  setPageNumber: (value: number) => void;
+  setSelectedSpec: (value: string) => void;
+  setSelectedSkill: (value: string) => void;
+  setSelectedLevels: (value: string) => void;
+  setSelectedRating: (value: string) => void;
+  setSelectedStatus: (value: string) => void;
+  clearFilters: () => void;
+}

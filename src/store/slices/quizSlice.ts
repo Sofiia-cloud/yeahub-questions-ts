@@ -9,7 +9,6 @@ export interface QuizState {
   isFinished: boolean;
   startedAt: string | null;
   finishedAt: string | null;
-  totalQuestions: number;
   mode: "repeat" | "new" | "random" | null;
 }
 
@@ -21,7 +20,6 @@ const initialState: QuizState = {
   isFinished: false,
   startedAt: null,
   finishedAt: null,
-  totalQuestions: 0,
   mode: null,
 };
 
@@ -34,7 +32,6 @@ export const quizSlice = createSlice({
       action: PayloadAction<{
         questions: IQuestion[];
         startedAt: string;
-        totalQuestions: number;
         answers: Array<{ questionId: number; answer: AnswerStatus }>;
         mode?: "repeat" | "new" | "random";
       }>,
@@ -45,7 +42,6 @@ export const quizSlice = createSlice({
       state.isFinished = false;
       state.startedAt = action.payload.startedAt;
       state.finishedAt = null;
-      state.totalQuestions = action.payload.totalQuestions;
       state.mode = action.payload.mode || null;
       state.answers = {};
 

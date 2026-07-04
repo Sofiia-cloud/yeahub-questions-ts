@@ -1,9 +1,10 @@
+
 import { api } from "../api";
 import type { Question, PublicQueryParams, QuestionsResponse } from "../types";
 
 interface QuestionFilters {
   skills?: number[];
-  specialization?: number | null;
+  specializationSlug?: string;
   rate?: number[];
   complexity?: number[];
 }
@@ -28,8 +29,8 @@ export const buildPublicQuery = ({
     params.titleOrDescription = search.trim();
   }
 
-  if (filters.specialization != null) {
-    params.specializationId = filters.specialization;
+  if (filters.specializationSlug) {
+    params.specializationSlug = filters.specializationSlug;
   }
 
   if (filters.skills?.length) {
@@ -50,10 +51,14 @@ export const buildPublicQuery = ({
 const questionsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getQuestions: builder.query<QuestionsResponse, GetQuestionsArgs>({
-      query: ({ filters, currentPage, search }) => ({
-        url: "questions/public-questions",
-        params: buildPublicQuery({ filters, currentPage, search }),
-      }),
+      query: ({ filters, currentPage, search }) => {
+        const params = buildPublicQuery({ filters, currentPage, search });
+        
+        return {
+          url: "questions/public-questions",
+          params,
+        };
+      },
       providesTags: ["Questions"],
     }),
     getQuestionById: builder.query<Question, number>({

@@ -1,14 +1,15 @@
 import FilterButtons from "../FilterButtons/FilterButtons";
 import styles from "./FilterPanel.module.css";
 import type {
-  Specialization,
-  Skill,
+  Specializations,
+  Skills,
   FilterValues,
   FilterActions,
-} from "../../types";
+} from "../../services/types";
+
 interface FilterData {
-  specializations: Specialization[];
-  skills: Skill[];
+  specializations: Specializations[];
+  skills: Skills[];
 }
 
 interface FilterPanelProps {
@@ -18,7 +19,7 @@ interface FilterPanelProps {
 }
 
 interface ConfigItem {
-  id: number;
+  id: number | string;
   title: string | number;
 }
 
@@ -57,9 +58,9 @@ function FilterPanel({ values, actions, data }: FilterPanelProps) {
   ];
 
   const statusConfig: ConfigItem[] = [
-    { id: 1, title: "Изученные" },
-    { id: 2, title: "Не изученные" },
-    { id: 3, title: "Все" },
+    { id: "studied", title: "Изученные" },
+    { id: "not-studied", title: "Не изученные" },
+    { id: "all", title: "Все" },
   ];
 
   return (
@@ -67,43 +68,61 @@ function FilterPanel({ values, actions, data }: FilterPanelProps) {
       <input
         placeholder="Введите запрос…"
         value={keywords}
-        onChange={(e) => setKeywords(e.target.value)}
+        onChange={(e) => {
+          console.log("🔍 Поиск:", e.target.value);
+          setKeywords(e.target.value);
+        }}
       />
+
       <FilterButtons
         name={"Специализация"}
         title={"slug"}
         buttons={specializations}
         selected={selectedSpec}
-        setSelected={setSelectedSpec}
+        setSelected={(value) => {
+          setSelectedSpec(value);
+        }}
       />
+
       <FilterButtons
         name={"Навыки"}
         title={"title"}
         valueKey={"id"}
         buttons={skills}
         selected={selectedSkill}
-        setSelected={setSelectedSkill}
+        setSelected={(value) => {
+          setSelectedSkill(value);
+        }}
       />
+
       <FilterButtons
         name={"Уровень сложности"}
         title={"title"}
         buttons={levelsConfig}
         selected={selectedLevels}
-        setSelected={setSelectedLevels}
+        setSelected={(value) => {
+          setSelectedLevels(value);
+        }}
       />
+
       <FilterButtons
         name={"Рейтинг"}
         title={"title"}
         buttons={ratingConfig}
         selected={selectedRating}
-        setSelected={setSelectedRating}
+        setSelected={(value) => {
+          setSelectedRating(value);
+        }}
       />
+
       <FilterButtons
         name={"Статус"}
         title={"title"}
         buttons={statusConfig}
         selected={selectedStatus}
-        setSelected={setSelectedStatus}
+        setSelected={(value) => {
+          setSelectedStatus(value);
+        }}
       />
     </div>
   );

@@ -1,7 +1,19 @@
 import { useState } from "react";
 import styles from "./FilterButtons.module.css";
 
-interface FilterButtonsProps<T> {
+interface FilterItemBase {
+  id: number | string;
+  title: string | number;
+  slug?: string;
+  description?: string;
+  imageSrc?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: string | null;
+  specializations?: unknown[];
+}
+
+interface FilterButtonsProps<T extends FilterItemBase> {
   name: string;
   title: keyof T;
   valueKey?: keyof T;
@@ -10,9 +22,7 @@ interface FilterButtonsProps<T> {
   setSelected: (value: string) => void;
 }
 
-function FilterButtons<
-  T extends { id: number | string; [key: string]: unknown },
->({
+function FilterButtons<T extends FilterItemBase>({
   name,
   title,
   valueKey = title,
