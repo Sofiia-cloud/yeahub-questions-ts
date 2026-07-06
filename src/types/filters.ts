@@ -1,4 +1,4 @@
-import type { QuestionsResponse } from "./question";
+import type { QuestionsResponse } from "../services/types";
 
 export interface Filters {
   keywords: string;

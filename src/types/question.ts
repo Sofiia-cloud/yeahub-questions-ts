@@ -1,6 +1,8 @@
-import type { User } from './user';
-import type { Specialization } from './specialization';
-import type { Skill } from './skill';
+import type {
+  User,
+  Specializations as Specialization,
+  Skills as Skill,
+} from "../services/types";
 
 export interface QuestionTopic {
   id: number;

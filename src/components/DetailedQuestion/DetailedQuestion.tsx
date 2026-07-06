@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./DetailedQuestion.module.css";
-import type { Question } from "../../types";
+import type { Question } from "../../services/types";
 import ExpandableText from "../ExpandableText/ExpandableText";
 
 interface DetailedQuestionProps {

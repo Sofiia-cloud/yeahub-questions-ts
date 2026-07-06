@@ -1,6 +1,6 @@
 import LevelTag from "../LevelTag/LevelTag";
 import styles from "./DetailedQuestionInfo.module.css";
-import type { Question } from "../../types";
+import type { Question } from "../../services/types";
 interface DetailedQuestionInfoProps {
   question: Question;
 }

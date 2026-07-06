@@ -48,13 +48,14 @@ export default function QuizSetup() {
         skills: data.skills.length > 0 ? data.skills.join(",") : undefined,
         complexity: data.complexity,
         limit: data.questionCount,
+        mode: data.mode,
       }).unwrap();
 
       if (result) {
         dispatch(
           startQuiz({
             questions: result.questions,
-            totalQuestions: result.fullCount,
+
             startedAt: result.startDate,
             answers: result.response.answers.map((a) => ({
               questionId: a.questionId,
@@ -78,7 +79,6 @@ export default function QuizSetup() {
       <h1 className={styles.title}>Собеседование</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-       
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Выбор специализации</p>
           <div className={styles.specializationGrid}>
@@ -95,7 +95,6 @@ export default function QuizSetup() {
           </div>
         </div>
 
-       
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Категории вопросов</p>
           <div className={styles.skillsGrid}>
@@ -112,7 +111,6 @@ export default function QuizSetup() {
           </div>
         </div>
 
-       
         <div className={styles.section}>
           <p className={styles.sectionTitle}>Уровень сложности</p>
           <div className={styles.complexityGroup}>
@@ -129,7 +127,6 @@ export default function QuizSetup() {
           </div>
         </div>
 
-       
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Выберите режим</h3>
           <div className={styles.modeGroup}>
@@ -148,7 +145,6 @@ export default function QuizSetup() {
           </div>
         </div>
 
-       
         <div className={styles.section}>
           <div className={styles.countControl}>
             <div className={styles.countInput}>

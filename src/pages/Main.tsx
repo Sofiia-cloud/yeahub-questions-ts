@@ -40,7 +40,12 @@ function Main() {
         specializationSlug: filters.specializationSlug
           ? filters.specializationSlug
           : undefined,
-        skills: filters.skills ? filters.skills.split(",").map(Number) : [],
+        skills: filters.skills
+          ? filters.skills
+              .split(",")
+              .map(Number)
+              .filter((n) => !isNaN(n))
+          : [],
         complexity: filters.complexity
           ? filters.complexity.split(",").map(Number)
           : [],

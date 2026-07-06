@@ -3,7 +3,8 @@ import { Pagination } from "../Pagination/Pagination";
 import styles from "./Questions.module.css";
 import { useState } from "react";
 import Question from "../Question/Question";
-import type { QuestionsResponse } from "../../types";
+
+import type { QuestionsResponse } from "../../services/types";
 interface QuestionsProps {
   questions: QuestionsResponse;
   pageNumber: number;

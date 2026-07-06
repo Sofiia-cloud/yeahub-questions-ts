@@ -1,4 +1,4 @@
-import type { Specialization } from './specialization';
+import type { Specializations as Specialization } from "../services/types";
 
 export interface Skill {
   id: number;

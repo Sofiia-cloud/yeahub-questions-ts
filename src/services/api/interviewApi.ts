@@ -6,16 +6,18 @@ interface InterviewParams {
   skills?: string;
   complexity?: string;
   limit?: number;
+  mode?: "repeat" | "new" | "random";
 }
 
 const interviewApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getInterview: builder.query<Interview, InterviewParams>({
-      query: ({ specialization, skills, complexity, limit = 10 }) => {
+      query: ({ specialization, skills, complexity, limit = 10, mode }) => {
         const params: Record<string, string | number | undefined> = {
           specialization,
           skills,
           limit,
+          mode,
         };
 
         if (complexity) {

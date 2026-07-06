@@ -1,4 +1,4 @@
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./Question.module.css";
 import DetailedQuestion from "../../components/DetailedQuestion/DetailedQuestion";
 import DetailedQuestionInfo from "../../components/DetailedQuestionInfo/DetailedQuestionInfo";
@@ -7,6 +7,8 @@ import { useGetQuestionByIdQuery } from "../../services/api/questionsApi";
 function Question() {
   const { questionId } = useParams<{ questionId: string }>();
   const navigate = useNavigate();
+  const id = questionId ? parseInt(questionId, 10) : NaN;
+  const { data: question, isLoading, error } = useGetQuestionByIdQuery(id);
 
   if (!questionId) {
     return (
@@ -19,8 +21,6 @@ function Question() {
     );
   }
 
-  const id = parseInt(questionId, 10);
-
   if (isNaN(id)) {
     return (
       <>
@@ -31,8 +31,6 @@ function Question() {
       </>
     );
   }
-
-  const { data: question, isLoading, error } = useGetQuestionByIdQuery(id);
 
   if (isLoading) {
     return (
