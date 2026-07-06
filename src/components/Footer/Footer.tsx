@@ -1,4 +1,9 @@
 import styles from "./Footer.module.css";
+import figma from "../../images/Figma.png";
+import telegram from "../../images/Telegram_white.png";
+import youtube from "../../images/YouTube_white.png";
+import tiktok from "../../images/TikTok.png";
+import github from "../../images/Github_white.png";
 function Footer() {
   return (
     <footer>
@@ -25,19 +30,19 @@ function Footer() {
           </p>
           <div className={styles.icons}>
             <a href="#">
-              <img src="src\images\Figma.png" alt="Figma" />
+              <img src={figma} alt="Figma" />
             </a>
             <a href="#">
-              <img src="src\images\Telegram_white.png" alt="Telegram" />
+              <img src={telegram} alt="Telegram" />
             </a>
             <a href="#">
-              <img src="src\images\YouTube_white.png" alt="YouTube" />
+              <img src={youtube} alt="YouTube" />
             </a>
             <a href="#">
-              <img src="src\images\TikTok.png" alt="TikTok" />
+              <img src={tiktok} alt="TikTok" />
             </a>
             <a href="#">
-              <img src="src\images\Github_white.png" alt="Github" />
+              <img src={github} alt="Github" />
             </a>
           </div>
         </div>
